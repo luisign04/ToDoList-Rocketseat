@@ -1,0 +1,46 @@
+.container{
+    width: 736px;
+    min-height: 287px;
+    background-color: var(--gray-600);
+    border: none;
+    padding: 0px 0px;
+    color: var(--gray-400);
+    text-align: center;;
+}
+
+.taskList{
+
+}
+
+.taskContent{
+
+}
+
+.taskCompleted{
+
+}
+
+.taskItem{
+
+}
+.checkbox{
+
+}
+
+.button{
+    
+}
+.deleteButton{
+
+}
+.header{
+
+}
+
+.empty{
+
+}
+
+.count{
+
+}
