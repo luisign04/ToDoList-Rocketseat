@@ -1,4 +1,4 @@
-.searchContainer{
+.container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     border-radius:8px;
 }
 
-.searchBar{
+.create{
     width: 638px;
     padding: 16px 16px;
     border-radius:8px;
@@ -15,7 +15,7 @@
     border: 1px solid #000000;
 }
 
-.searchBar::placeholder{
+.create::placeholder{
     color: var(--gray-300);
 }
 .button{

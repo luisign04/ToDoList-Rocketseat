@@ -6,6 +6,12 @@
     padding: 0px 0px;
     color: var(--gray-400);
     text-align: center;;
+    margin: auto;
+    display: flex;
+}
+
+.form{
+
 }
 
 .taskList{
@@ -28,7 +34,7 @@
 }
 
 .button{
-    
+
 }
 .deleteButton{
 

@@ -1,31 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Tasks.module.css';
 import emptyLogo from '../assets/emptyLogo.png';
 
-export default function Tasks() {
-  // Estado para armazenar as tarefas
-  const [tasks, setTasks] = useState([]);
-  // Estado para o título da nova tarefa
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+export default function Tasks({tasks, setTasks}) {
 
-  // Função para criar uma nova tarefa
-  function handleCreateNewTask(e) {
-    e.preventDefault();
-    if (newTaskTitle.trim() === '') {
-      return;
-    }
-    
+  // Função que cria a tarefa, chamada pelo componente Create
+  function handleCreateTask(taskTitle) {
+    if (taskTitle.trim() === '') return;
+
     const newTask = {
-      id: Date.now(), // Usando timestamp como ID
-      title: newTaskTitle,
+      id: Date.now(),
+      title: taskTitle,
       completed: false,
     };
-
     setTasks(prevTasks => [newTask, ...prevTasks]);
-    setNewTaskTitle(''); // Limpa o input
   }
 
-  // Função para alternar a conclusão da tarefa
+  // Alterna a conclusão da tarefa
   function handleToggleTaskCompletion(id) {
     setTasks(prevTasks =>
       prevTasks.map(task => {
@@ -37,16 +28,16 @@ export default function Tasks() {
     );
   }
 
-  // Função para deletar uma tarefa
+  // Deleta uma tarefa
   function handleDeleteTask(id) {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
   }
 
-  // Contadores de tarefas
+  // Contadores
   const createdTasksCount = tasks.length;
   const completedTasksCount = tasks.filter(task => task.completed).length;
 
-  // Variável para renderizar o conteúdo: lista de tarefas ou mensagem vazia
+  // Exibição condicional (sem operador ternário)
   let content;
   if (tasks.length === 0) {
     content = (
@@ -90,21 +81,10 @@ export default function Tasks() {
 
   return (
     <div className={styles.container}>
-      {/* Formulário para criar uma nova tarefa */}
-      <form onSubmit={handleCreateNewTask} className={styles.form}>
-        <input
-          type="text"
-          placeholder="Adicione uma nova tarefa"
-          value={newTaskTitle}
-          onChange={(e) => setNewTaskTitle(e.target.value)}
-          className={styles.input}
-        />
-        <button type="submit" className={styles.createButton}>
-          Criar
-        </button>
-      </form>
+      
+  
 
-      {/* Cabeçalho das tarefas */}
+      {/* Cabeçalho: contadores */}
       <header className={styles.header}>
         <div>
           Tarefas criadas <span className={styles.count}>{createdTasksCount}</span>
@@ -117,7 +97,7 @@ export default function Tasks() {
         </div>
       </header>
 
-      {/* Conteúdo: lista de tarefas ou mensagem vazia */}
+      {/* Lista de tarefas ou estado vazio */}
       {content}
     </div>
   );
