@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './Tasks.module.css';
 import emptyLogo from '../assets/emptyLogo.png';
+import trashIcon from '../assets/delete.png';
 
-export default function Tasks({tasks, setTasks}) {
-
-  // Função que cria a tarefa, chamada pelo componente Create
+export default function Tasks({ tasks, setTasks }) {
   function handleCreateTask(taskTitle) {
     if (taskTitle.trim() === '') return;
 
@@ -16,7 +15,6 @@ export default function Tasks({tasks, setTasks}) {
     setTasks(prevTasks => [newTask, ...prevTasks]);
   }
 
-  // Alterna a conclusão da tarefa
   function handleToggleTaskCompletion(id) {
     setTasks(prevTasks =>
       prevTasks.map(task => {
@@ -28,16 +26,13 @@ export default function Tasks({tasks, setTasks}) {
     );
   }
 
-  // Deleta uma tarefa
   function handleDeleteTask(id) {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
   }
 
-  // Contadores
   const createdTasksCount = tasks.length;
   const completedTasksCount = tasks.filter(task => task.completed).length;
 
-  // Exibição condicional (sem operador ternário)
   let content;
   if (tasks.length === 0) {
     content = (
@@ -50,54 +45,43 @@ export default function Tasks({tasks, setTasks}) {
   } else {
     content = (
       <ul className={styles.taskList}>
-        {tasks.map(task => {
-          let taskClassName = '';
-          if (task.completed) {
-            taskClassName = styles.completed;
-          }
-          return (
-            <li key={task.id} className={styles.taskItem}>
-              <div className={styles.taskContent}>
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => handleToggleTaskCompletion(task.id)}
-                  className={styles.checkbox}
-                />
-                <p className={taskClassName}>{task.title}</p>
-              </div>
-              <button
-                className={styles.deleteButton}
-                onClick={() => handleDeleteTask(task.id)}
-              >
-                Deletar
-              </button>
-            </li>
-          );
-        })}
+        {tasks.map(task => (
+          <li key={task.id} className={styles.taskItem}>
+            <div className={styles.taskContent}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => handleToggleTaskCompletion(task.id)}
+                className={styles.checkbox}
+              />
+              <p className={task.completed ? styles.completed : styles.taskText}>{task.title}</p>
+            </div>
+            <img
+              src={trashIcon}
+              alt="Deletar"
+              className={styles.trashIcon}
+              onClick={() => handleDeleteTask(task.id)}
+              style={{ marginLeft: '60px' }}
+            />
+          </li>
+        ))}
       </ul>
     );
   }
 
   return (
     <div className={styles.container}>
-      
-  
-
-      {/* Cabeçalho: contadores */}
       <header className={styles.header}>
         <div>
           Tarefas criadas <span className={styles.count}>{createdTasksCount}</span>
         </div>
         <div>
           Concluídas{' '}
-          <span className={styles.count}>
+          <span className={styles.completedCount}>
             {completedTasksCount} de {createdTasksCount}
           </span>
         </div>
       </header>
-
-      {/* Lista de tarefas ou estado vazio */}
       {content}
     </div>
   );

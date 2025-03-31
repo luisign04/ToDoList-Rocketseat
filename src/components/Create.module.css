@@ -4,6 +4,8 @@
     align-items: center;
     width: 100%;
     border-radius:8px;
+    margin: 0 auto;
+    margin-top: -1.5rem;
 }
 
 .create{
@@ -11,8 +13,9 @@
     padding: 16px 16px;
     border-radius:8px;
     background-color: var(--gray-500);
-    color: white;
-    border: 1px solid #000000;
+    color: var(--gray-100);
+    border: none;
+    outline: none;
 }
 
 .create::placeholder{
@@ -20,13 +23,11 @@
 }
 .button{
     padding: 16px 16px;
-
     background: var(--blueDark);
     margin-left: 9px;
-    border-radius: 8;
-    color: white;
-    border: 1px solid #000000;
+    border: none;
     border-radius: 8px;
+    color: var(--gray-100);
     cursor: pointer;
 }
 .button:hover{
